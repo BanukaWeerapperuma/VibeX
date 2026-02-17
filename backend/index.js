@@ -1,19 +1,29 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors";
+import { connectDB } from "./config/db.js";
+
+import { setServers } from "node:dns/promises";
+setServers(["1.1.1.1", "8.8.8.8"]);
 
 dotenv.config()
-const app = express()
-const port = process.env.PORT || 5000
 
 
+// app config
+const app = express();
+const port =process.env.PORT || 4000;
 
-app.get("/" , (req,res) => {
-    res.send("hello")
-})
+//middlewares
+app.use(express.json());
+app.use(cors());
 
+// DB connection
+connectDB();
 
-app.listen(port, () => 
-    console.log(`Server running on port ${port}🔥`
+app.get("/", (req, res) => {
+  res.send("API Working");
+});
 
-));
-
+app.listen(port, () => {
+  console.log(`Server Started on port: ${port}`);
+});
