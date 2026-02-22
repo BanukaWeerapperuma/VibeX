@@ -41,7 +41,15 @@ const userSchema = new mongoose.Schema({
         {type:mongoose.Schema.Types.ObjectId,
             ref:"Post"
         } 
-    ]
+    ],
+    loops:[
+        {type:mongoose.Schema.Types.ObjectId,
+            ref:"Loop"
+        } 
+    ],
+    story:{type:mongoose.Schema.Types.ObjectId,
+            ref:"Story"
+    }
 },{timestamps:true})
 
 const User = mongoose.model("User",userSchema)
