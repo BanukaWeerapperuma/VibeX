@@ -4,6 +4,9 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 
 import { setServers } from "node:dns/promises";
+import cookieParser from "cookie-parser";
+
+import authRouter from "./routes/auth.routes.js";
 setServers(["1.1.1.1", "8.8.8.8"]);
 
 dotenv.config()
@@ -15,7 +18,14 @@ const port =process.env.PORT || 4000;
 
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:5173",
+  withCredentials:true
+}));
+
+app.use(cookieParser())
+app.use("/api/auth",authRouter)
+
 
 // DB connection
 connectDB();
