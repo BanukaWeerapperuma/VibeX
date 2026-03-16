@@ -6,6 +6,8 @@ import { connectDB } from "./config/db.js";
 import { setServers } from "node:dns/promises";
 import cookieParser from "cookie-parser";
 
+import userRouter from "./routes/user.routes.js";
+
 import authRouter from "./routes/auth.routes.js";
 setServers(["1.1.1.1", "8.8.8.8"]);
 
@@ -25,6 +27,8 @@ app.use(cors({
 
 app.use(cookieParser())
 app.use("/api/auth",authRouter)
+
+
 
 
 // DB connection
